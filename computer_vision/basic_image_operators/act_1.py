@@ -2,10 +2,12 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def load_image(path: str) -> np.ndarray:
     """Load image using cv2.imread"""
     image = cv2.imread(path)
     return image
+
 
 def plot_cv2_to_plt(img_array: list, title: str, gray: bool) -> None:
     """Plot array with CV2 image arrays."""
@@ -31,12 +33,14 @@ def save_img(img_array: list, file_path: str, base_file_name: str) -> None:
     for index, img in enumerate(img_array):
         cv2.imwrite(f"data/act_1/{file_path}/{base_file_name}_{index}.png", img)
 
+
 def add_gaussian_noise(img):
-    gauss = np.random.normal(0,1,img.size)
-    gauss = gauss.reshape(img.shape[0],img.shape[1],img.shape[2]).astype('uint8')
-# Add the Gaussian noise to the image
-    img_gauss = cv2.add(img,gauss)
+    gauss = np.random.normal(0, 1, img.size)
+    gauss = gauss.reshape(img.shape[0], img.shape[1], img.shape[2]).astype("uint8")
+    # Add the Gaussian noise to the image
+    img_gauss = cv2.add(img, gauss)
     return img_gauss
+
 
 if __name__ == "__main__":
 
@@ -83,7 +87,9 @@ if __name__ == "__main__":
     plot_cv2_to_plt(img_gaussian, "act1_gaussian", gray=True)
     save_img(img_gaussian, "gaussian", "gaussian")
 
-    img_gaussian_with_smooth = [cv2.GaussianBlur(img, (5,5), cv2.BORDER_DEFAULT) for img in img_gaussian]
+    img_gaussian_with_smooth = [
+        cv2.GaussianBlur(img, (5, 5), cv2.BORDER_DEFAULT) for img in img_gaussian
+    ]
     plot_cv2_to_plt(img_gaussian_with_smooth, "act1_gaussian_smooth", gray=False)
     save_img(img_gaussian_with_smooth, "gaussian_smooth", "gaussian_smooth")
 

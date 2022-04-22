@@ -2,15 +2,18 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def load_image(path: str) -> np.ndarray:
     """Load image using cv2.imread"""
     image = cv2.imread(path)
     return image
 
+
 def save_img(img_array: list, file_path: str, base_file_name: str) -> None:
     """Save image array as a png files."""
     for index, img in enumerate(img_array):
         cv2.imwrite(f"data/act_1/{file_path}/{base_file_name}_{index}.png", img)
+
 
 def plot_cv2_to_plt(img_array: list, title: str, gray: bool) -> None:
     """Plot array with CV2 image arrays."""
@@ -30,7 +33,8 @@ def plot_cv2_to_plt(img_array: list, title: str, gray: bool) -> None:
     plt.savefig(f"data/act_1/plots/{title}_plot.png")
     plt.show()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     base_path = "data/buildings/building_"
 
     img_array = []
@@ -51,7 +55,6 @@ if __name__ == '__main__':
 
     save_img(img_sobel, "building_sobel", "building_sobel")
 
-
     # Canny edge detection
     img_canny = []
     for img in img_blur:
@@ -59,5 +62,3 @@ if __name__ == '__main__':
         img_canny.append(canny)
 
     save_img(img_canny, "building_canny", "building_canny")
-
-
